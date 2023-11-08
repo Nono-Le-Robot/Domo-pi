@@ -14,6 +14,7 @@ function handler (req, res) {
     }
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(data);
+    console.log('server ON')
     return res.end();
   });
 }
@@ -31,6 +32,7 @@ io.sockets.on('connection', function (socket) {
 });
 
 process.on('SIGINT', function () {
+  console.log("server OFF")
   LED.writeSync(0);
   LED.unexport();
   process.exit();
