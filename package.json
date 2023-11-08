@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Nono-Le-Robot/Domo-pi#readme",
   "dependencies": {
-    "onoff": "^6.0.3"
+    "onoff": "^6.0.3",
+    "socket.io": "^4.7.2"
   }
 }
