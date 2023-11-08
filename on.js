@@ -7,5 +7,5 @@ LED.unexport();
 
 console.clear();
 console.log("========================================");
-console.log('led off');
+console.log("LED STATUS : ON");
 console.log("========================================");
