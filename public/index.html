@@ -7,19 +7,7 @@
 </head>
 <body>
     <h1>Contrôle vocal de la LED</h1>
-    <button id="startButton">Commencer la reconnaissance vocale</button>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const startButton = document.getElementById('startButton');
-
-            startButton.addEventListener('click', () => {
-                fetch('/listen')
-                    .then(response => response.text())
-                    .then(result => alert(result))
-                    .catch(error => console.error(error));
-            });
-        });
-    </script>
+    <button id="mic">Commencer la reconnaissance vocale</button>
+    <script src="./voc.js"></script>
 </body>
 </html>
