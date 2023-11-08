@@ -3,6 +3,20 @@ const Gpio = require('onoff').Gpio;
 const app = express();
 const led = new Gpio(6, 'out'); // Utilisez le bon numéro de GPIO
 
+const annyang = require('annyang');
+annyang.start();
+
+annyang.addCommands({
+  'allume la led': () => {
+    led.writeSync(1); // Allumer la LED
+    console.log('LED allumée');
+  },
+  'éteins la led': () => {
+    led.writeSync(0); // Éteindre la LED
+    console.log('LED éteinte');
+  },
+});
+
 app.use(express.static('public')); // Dossier pour les fichiers statiques (HTML, CSS, JS)
 
 app.get('/on', (req, res) => {
