@@ -31,13 +31,15 @@ recognition.onresult = function (event){
     transcript = transcript.toLowerCase(); 
     if(transcript.includes("led on")  ){
         console.log(transcript)
-        fetch('/on');
+        fetch('https://192.168.0.102/on');
+
+        
         transcript = ""         
         readOut("la led est allumée")
     }
     if(transcript.includes("led off")  ){
         console.log(transcript)
-        fetch('/off');
+        fetch('https://192.168.0.102/off');
         transcript = ""         
         readOut("la led est eteinte")
     }
