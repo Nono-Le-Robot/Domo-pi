@@ -7,8 +7,8 @@ var LED = new Gpio(6, 'out');
 http.listen(8080);
 
 function handler (req, res) {
-  fs.readFile('./index.html', function(err, data) {
-    if (err) {
+    fs.readFile(__dirname + '/public/index.html', function(err, data) {
+    if (err) { 
       res.writeHead(404, {'Content-Type': 'text/html'});
       return res.end("404 Not Found");
     }
