@@ -21,8 +21,7 @@ function endBlink() {
     LED.writeSync(0);
     console.log("LED STATUS : OFF");
     LED.unexport();
+    console.log("========================================");
 }
 
 setTimeout(endBlink, 5000);
-
-console.log("========================================");
