@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Contrôle de LED</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande vocale</title>
 </head>
 <body>
-  <h1>Contrôle de LED</h1>
-  <button onclick="turnOn()">Allumer</button>
-  <button onclick="turnOff()">Éteindre</button>
-  <script>
-    function turnOn() {
-      fetch('/on');
-    }
-    function turnOff() {
-      fetch('/off');
-    }
-  </script>
+    <h1>Contrôle vocal de la LED</h1>
+    <button id="startButton">Commencer la reconnaissance vocale</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const startButton = document.getElementById('startButton');
+
+            startButton.addEventListener('click', () => {
+                fetch('/listen')
+                    .then(response => response.text())
+                    .then(result => alert(result))
+                    .catch(error => console.error(error));
+            });
+        });
+    </script>
 </body>
 </html>
