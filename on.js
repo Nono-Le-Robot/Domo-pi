@@ -4,4 +4,8 @@ const LED = new Gpio(port_GPIO, 'out');
 
 LED.writeSync(1);
 LED.unexport();
-console.log('led on');
+
+console.clear();
+console.log("========================================");
+console.log('led off');
+console.log("========================================");
