@@ -19,8 +19,10 @@ function handler (req, res) {
 }
 
 io.sockets.on('connection', function (socket) {
+   console.log('connexion OK')
   var lightvalue = 0;
   socket.on('light', function(data) {
+    console.log("light commande detected");
     lightvalue = data;
     if (lightvalue != LED.readSync()) {
       LED.writeSync(lightvalue);
