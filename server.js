@@ -34,6 +34,13 @@ app.get('/off-all', (req, res) => {
   res.send('LED éteinte');
 });
 
+app.get('/on-all', (req, res) => {
+  ledBack.writeSync(1); // Éteindre la LED
+  ledFront.writeSync(1);
+  res.send('LED éteinte');
+
+});
+
 app.get('/on-all-timer', (req, res) => {
   ledBack.writeSync(1); // Éteindre la LED
   ledFront.writeSync(1);
