@@ -91,3 +91,26 @@ function turnOnAll() {
 function turnOffAll() {
     fetch('/off-all');
 }
+
+function toggleSwitchRedLightFront(toggle) {
+    var switchElement = toggle.querySelector('.switch');
+    switchElement.classList.toggle('off-red-light');
+    if(switchElement.classList.contains('off-red-light')){
+        fetch('/on-front')
+    }
+    else{
+        fetch('/off-front')
+    }
+  }
+
+
+  function toggleSwitchRedLightBack(toggle) {
+    var switchElement = toggle.querySelector('.switch');
+    switchElement.classList.toggle('off-red-light');
+    if(switchElement.classList.contains('off-red-light')){
+        fetch('/on-back')
+    }
+    else{
+        fetch('/off-back')
+    }
+  }

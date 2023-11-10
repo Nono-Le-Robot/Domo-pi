@@ -12,13 +12,20 @@
   <div id="main">
     <div id="avant">
       <h2>AVANT :</h2>
-      <img onclick="turnOnFront()"  src="./assets/idee (1).png" id="arriere-img" alt="" srcset="">
-      <img onclick="turnOffFront()"  src="./assets/idee.png" id="arriere-img" alt="" srcset="">
+      <div class="flex-img">
+        <div class="toggle light" onclick="toggleSwitchRedLightFront(this)">
+          <div class="switch switch-light off-red-light"></div>
+        </div>
+      
+      </div>
   </div>
   <div id="arriere">
     <h2>ARRIERE :</h2>
-    <img onclick="turnOnBack()"  src="./assets/idee (1).png" id="arriere-img" alt="" srcset="">
-    <img onclick="turnOffBack()"  src="./assets/idee.png" id="arriere-img" alt="" srcset="">
+    <div class="flex-img">
+      <div class="toggle light" onclick="toggleSwitchRedLightBack(this)">
+        <div class="switch switch-light off-red-light"></div>
+      </div>
+    </div>
 
   </div>
 </div>
