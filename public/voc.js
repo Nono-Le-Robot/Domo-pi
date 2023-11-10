@@ -29,7 +29,7 @@ recognition.onresult = function (event){
     let transcript = event.results[current][0].transcript
     console.log(transcript);
     transcript = transcript.toLowerCase(); 
-    if(transcript.includes("led on")  ){
+    if(transcript.includes("test")  ){
         console.log(transcript)
         fetch('/on');
 
@@ -37,7 +37,7 @@ recognition.onresult = function (event){
         transcript = ""         
         readOut("la led est allumée")
     }
-    if(transcript.includes("led off")  ){
+    if(transcript.includes("ok")  ){
         console.log(transcript)
         fetch('/off');
         transcript = ""         
