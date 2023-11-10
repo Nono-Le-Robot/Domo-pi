@@ -1,7 +1,7 @@
 const localtunnel = require('localtunnel');
 
 function restartLocalTunnel() {
-  const tunnel = localtunnel(5000, { subdomain: 'lumvroom' }, (err, tunnel) => {
+  const tunnel = localtunnel(3000, { subdomain: 'lumvroom' }, (err, tunnel) => {
     if (err) {
       console.error('Erreur lors du démarrage de LocalTunnel :', err.message);
     } else {
