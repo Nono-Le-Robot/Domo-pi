@@ -6,7 +6,6 @@
   "scripts": {
     "on": "node on.js",
     "off": "node off.js",
-    "blink": "node blink.js",
     "server": "node server.js check-connexion.js",
     "connexion" : "node check-connexion.js"
   },
