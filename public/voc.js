@@ -29,34 +29,44 @@ recognition.onresult = function (event){
     let transcript = event.results[current][0].transcript
     console.log(transcript);
     transcript = transcript.toLowerCase(); 
-    if(transcript.includes("allume la led blanche")  ){
+    if(transcript.includes("allume l'avant'")  ){
         console.log(transcript)
-        fetch('/on-white');
-
-        
+        fetch('/on-front');
         transcript = ""         
-        readOut("la led est allumée")
+        readOut("l'avant est allumé")
     }
-    if(transcript.includes("éteins la led blanche")  ){
+    if(transcript.includes("éteins l'avant")  ){
         console.log(transcript)
-        fetch('/off-white');
+        fetch('/off-front');
         transcript = ""         
-        readOut("la led est eteinte")
+        readOut("l'avant est eteins")
     }
 
-    if(transcript.includes("allume la led rouge")  ){
+    if(transcript.includes("allume l'arrière")  ){
         console.log(transcript)
-        fetch('/on-red');
-
-        
+        fetch('/on-back');
         transcript = ""         
-        readOut("la led est allumée")
+        readOut("l'arriere est allumé")
     }
-    if(transcript.includes("éteins la led rouge")  ){
+    if(transcript.includes("éteins l'arrière")  ){
         console.log(transcript)
-        fetch('/off-red');
+        fetch('/off-back');
         transcript = ""         
-        readOut("la led est eteinte")
+        readOut("l'arriere est eteins")
+    }
+
+    if(transcript.includes("allume tout")  ){
+        console.log(transcript)
+        fetch('/on-all');
+        transcript = ""         
+        readOut("tout est allumé")
+    }
+
+    if(transcript.includes("éteins tout")  ){
+        console.log(transcript)
+        fetch('/off-all');
+        transcript = ""         
+        readOut("tout est eteins")
     }
 }
 
