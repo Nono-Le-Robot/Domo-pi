@@ -8,11 +8,24 @@ recognition.lang = 'fr-FR';
 
 //============================= addEventListener ==========================
 recognition.start();
+function fetchLEDStatus() {
+    fetch('/status')
+        .then(response => response.json())
+        .then(status => {
+            // Faites quelque chose avec l'état des LED
+            console.log('État des LED:', status);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération de l\'état des LED:', error);
+        });
+}
+fetchLEDStatus();
 
 //============================= Functions ==========================
 recognition.onstart = function () {
     console.log("Speech recognition started.");
 };
+
 
 function readOut(message) {
     const speech = new SpeechSynthesisUtterance();
@@ -114,3 +127,5 @@ function toggleSwitchRedLightFront(toggle) {
         fetch('/on-back')
     }
   }
+
+

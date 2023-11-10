@@ -7,6 +7,15 @@ const ledBack = new Gpio(5, 'out'); // Utilisez le bon numéro de GPIO
 
 app.use(express.static('public')); // Dossier pour les fichiers statiques (HTML, CSS, JS)
 
+app.get('/status', (req, res) => {
+  const status = {
+    front: ledFront.readSync(),
+    back: ledBack.readSync(),
+  };
+  res.json(status);
+});
+
+
 app.get('/on-front', (req, res) => {
   ledFront.writeSync(1); // Allumer la LED
   res.send('LED allumée');
