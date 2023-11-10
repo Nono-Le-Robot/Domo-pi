@@ -68,6 +68,14 @@ recognition.onresult = function (event){
         transcript = ""         
         readOut("tout est eteins")
     }
+
+    if(transcript.includes("allume tout 5 secondes")  ){
+        console.log(transcript)
+        fetch('/on-all-timer');
+        transcript = ""         
+        readOut("tout est allumé pendant 5 secondes")
+    }
+
 }
 
 recognition.onend = function () {
