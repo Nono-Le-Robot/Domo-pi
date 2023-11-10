@@ -175,6 +175,7 @@
     right: 20px;
     animation: bounce-right 0.7s ease-out;
   }
+  
 
   .switch-front {
     height: 112px;
@@ -185,7 +186,6 @@
     right: 20px;
     animation: bounce-right 0.7s ease-out;
   }
-  
   .switch-light {
     background: var(--on-light);
     box-shadow: var(--on-light-shadow);
@@ -196,7 +196,7 @@
     box-shadow: var(--on-dark-shadow);
   }
   
-  .switch.off-red-light {
+  .switch-back.off-red-light,.switch-front.off-red-light {
     transform: translateX(-150px);
     transition: all ease 0.3s;
     background: var(--off-red-light);
@@ -205,7 +205,7 @@
     animation: bounce-left 0.7s ease-out;
   }
   
-  .switch.off-light {
+  .switch-back.off-light ,   .switch-front.off-light {
     transform: translateX(-150px);
     transition: all ease 0.3s;
     background: var(--off-light);
@@ -214,7 +214,7 @@
     animation: bounce-left 0.7s ease-out;
   }
   
-  .switch.off-red-dark {
+  .switch-back.off-red-dark,   .switch-front.off-red-dark {
     transform: translateX(-150px);
     transition: all ease 0.3s;
     background: var(--off-red-dark);
@@ -223,7 +223,7 @@
     animation: bounce-left 0.7s ease-out;
   }
   
-  .switch.off-dark {
+  .switch-back.off-dark,.switch-back.off-dark {
     transform: translateX(-150px);
     transition: all ease 0.3s;
     background: var(--off-dark);

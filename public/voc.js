@@ -14,18 +14,20 @@ function fetchLEDStatus() {
         .then(status => {
             // Faites quelque chose avec l'état des LED
             console.log('État des LED:', status);
-            if(status.front === 1){
-                switchElement.classList.remove('off-red-light');
-            }
-            else{
-                switchElement.classList.add('off-red-light');
-            }
+    var switchElementFront = toggle.querySelector('.switch-front');
+    var switchElementBack = toggle.querySelector('.switch-back');
 
-            if(status.turnOnBack === 1){
-                switchElement.classList.remove('off-red-light');
+            if(status.front === 1){
+                switchElementFront.classList.remove('off-red-light');
             }
             else{
-                switchElement.classList.add('off-red-light');
+                switchElementFront.classList.add('off-red-light');
+            }
+            if(status.back === 1){
+                switchElementBack.classList.remove('off-red-light');
+            }
+            else{
+                switchElementBack.classList.add('off-red-light');
             }
         })
         .catch(error => {
