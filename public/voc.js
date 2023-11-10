@@ -7,10 +7,7 @@ recognition.continuous = false;
 recognition.lang = 'fr-FR';
 
 //============================= addEventListener ==========================
-
-mic.addEventListener("click", () => {
-    recognition.start();
-});
+recognition.start();
 
 //============================= Functions ==========================
 recognition.onstart = function () {
