@@ -50,7 +50,7 @@ app.get('/on-all-timer', (req, res) => {
   setTimeout(() => {
       ledBack.writeSync(0);
       ledFront.writeSync(0);
-  }, duration * 60 * 1000);
+  }, duration);
 
   res.send(`LED allumée pendant ${duration} ${duration > 1 ? 'minutes' : 'minute'}`);
 });
