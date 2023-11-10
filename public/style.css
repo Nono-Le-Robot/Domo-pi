@@ -166,7 +166,17 @@
   
   /* Switches */
   
-  .switch {
+  .switch-back {
+    height: 112px;
+    width: 112px;
+    border-radius: 100px;
+    position: absolute;
+    transition: all ease 0.3s;
+    right: 20px;
+    animation: bounce-right 0.7s ease-out;
+  }
+
+  .switch-front {
     height: 112px;
     width: 112px;
     border-radius: 100px;

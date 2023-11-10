@@ -14,6 +14,19 @@ function fetchLEDStatus() {
         .then(status => {
             // Faites quelque chose avec l'état des LED
             console.log('État des LED:', status);
+            if(status.front === 1){
+                switchElement.classList.remove('off-red-light');
+            }
+            else{
+                switchElement.classList.add('off-red-light');
+            }
+
+            if(status.turnOnBack === 1){
+                switchElement.classList.remove('off-red-light');
+            }
+            else{
+                switchElement.classList.add('off-red-light');
+            }
         })
         .catch(error => {
             console.error('Erreur lors de la récupération de l\'état des LED:', error);
@@ -106,9 +119,9 @@ function turnOffAll() {
 }
 
 function toggleSwitchRedLightFront(toggle) {
-    var switchElement = toggle.querySelector('.switch');
-    switchElement.classList.toggle('off-red-light');
-    if(switchElement.classList.contains('off-red-light')){
+    var switchElementFront = toggle.querySelector('.switch-front');
+    switchElementFront.classList.toggle('off-red-light');
+    if(switchElementFront.classList.contains('off-red-light')){
         fetch('/off-front')
     }
     else{
@@ -118,9 +131,9 @@ function toggleSwitchRedLightFront(toggle) {
 
 
   function toggleSwitchRedLightBack(toggle) {
-    var switchElement = toggle.querySelector('.switch');
-    switchElement.classList.toggle('off-red-light');
-    if(switchElement.classList.contains('off-red-light')){
+    var switchElementBack = toggle.querySelector('.switch-back');
+    switchElementBack.classList.toggle('off-red-light');
+    if(switchElementBack.classList.contains('off-red-light')){
         fetch('/off-back')
     }
     else{
