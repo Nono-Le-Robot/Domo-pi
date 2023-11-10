@@ -9,14 +9,19 @@ recognition.lang = 'fr-FR';
 //============================= addEventListener ==========================
 recognition.start();
 function fetchLEDStatus() {
+    var switchElementFront = document.querySelector('.switch-front');
+    var switchElementBack = document.querySelector('.switch-back');
+
+    if(ledstat.front == 1){
+        alert('niiiicce')
+        switchElementFront.classList.remove('off-red-light');
+    }
+    else{
+        switchElementFront.classList.add('off-red-light');
+    }
     fetch('/status')
         .then(response => response.json())
         .then(status => {
-            // Faites quelque chose avec l'état des LED
-            console.log('État des LED:', status);
-    var switchElementFront = toggle.querySelector('.switch-front');
-    var switchElementBack = toggle.querySelector('.switch-back');
-
             if(status.front === 1){
                 switchElementFront.classList.remove('off-red-light');
             }
