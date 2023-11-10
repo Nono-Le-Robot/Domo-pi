@@ -29,7 +29,7 @@ recognition.onresult = function (event){
     let transcript = event.results[current][0].transcript
     console.log(transcript);
     transcript = transcript.toLowerCase(); 
-    if(transcript.includes("allume l'avant'")  ){
+    if(transcript.includes("allume l'avant")  ){
         console.log(transcript)
         fetch('/on-front');
         transcript = ""         
