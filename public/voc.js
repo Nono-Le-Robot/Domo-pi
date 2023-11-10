@@ -11,24 +11,16 @@ recognition.start();
 function fetchLEDStatus() {
     var switchElementFront = document.querySelector('.switch-front');
     var switchElementBack = document.querySelector('.switch-back');
-
-    if(ledstat.front == 1){
-        alert('niiiicce')
-        switchElementFront.classList.remove('off-red-light');
-    }
-    else{
-        switchElementFront.classList.add('off-red-light');
-    }
     fetch('/status')
         .then(response => response.json())
         .then(status => {
-            if(status.front === 1){
+            if(status.front){
                 switchElementFront.classList.remove('off-red-light');
             }
             else{
                 switchElementFront.classList.add('off-red-light');
             }
-            if(status.back === 1){
+            if(status.back){
                 switchElementBack.classList.remove('off-red-light');
             }
             else{
