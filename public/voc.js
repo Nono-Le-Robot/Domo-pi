@@ -7,7 +7,6 @@ recognition.continuous = false;
 recognition.lang = 'fr-FR';
 
 //============================= addEventListener ==========================
-let timerDuration = 0;
 
 mic.addEventListener("click", () => {
     recognition.start();
@@ -32,7 +31,7 @@ recognition.onresult = function (event) {
     console.log(transcript);
 
     if (transcript.includes("allume")) {
-        if (transcript.includes("avant") || transcript.includes('vent')) {
+        if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
             fetch('/on-front');
             readOut("l'avant est allumé");
         } else if (transcript.includes("arrière")) {
@@ -43,7 +42,7 @@ recognition.onresult = function (event) {
             readOut("tout est allumé");
         }
     } else if (transcript.includes("éteins")) {
-        if (transcript.includes("avant") || transcript.includes('vent')) {
+        if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
             fetch('/off-front');
             readOut("l'avant est éteint");
         } else if (transcript.includes("arrière")) {
@@ -58,8 +57,8 @@ recognition.onresult = function (event) {
     const match = transcript.match(/allume pendant (\d+) (minute|minutes)/);
     if (match) {
         const minutes = parseInt(match[1]);
-        timerDuration = minutes * 60 * 1000; // Convertit les minutes en millisecondes
-        fetch(`/on-all-timer?duration=${minutes}`);
+        let timerDuration = minutes * 60 * 1000; // Convertit les minutes en millisecondes
+        fetch(`/on-all-timer?duration=${timerDuration}`);
         readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
     }    
 };
