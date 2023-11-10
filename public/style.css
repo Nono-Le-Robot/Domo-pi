@@ -1,5 +1,10 @@
+*{
+    user-select: none;
+}
+
 #logo{
     height: 50vh;
+    max-width: 90vw;
     display: flex;
     align-items: center;
     justify-content: center;
