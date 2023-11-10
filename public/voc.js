@@ -70,3 +70,24 @@ recognition.onend = function () {
     console.log("Speech recognition ended. Restarting...");
     recognition.start();
 };
+
+function turnOnFront() {
+    fetch('/on-front');
+}
+function turnOffFront() {
+    fetch('/off-front');
+}
+
+function turnOnBack() {
+    fetch('/on-back');
+}
+function turnOffBack() {
+    fetch('/off-back');
+}
+
+function turnOnAll() {
+    fetch('/on-all');
+}
+function turnOffAll() {
+    fetch('/off-all');
+}

@@ -12,25 +12,16 @@
   <div id="main">
     <div id="avant">
       <h2>AVANT :</h2>
-      <img onclick="turnOn()" src="./assets/eteindre.png" id="avant-img" alt="" srcset="">
+      <img onclick="turnOnFront()"  src="./assets/idee (1).png" id="arriere-img" alt="" srcset="">
+      <img onclick="turnOffFront()"  src="./assets/idee.png" id="arriere-img" alt="" srcset="">
   </div>
   <div id="arriere">
     <h2>ARRIERE :</h2>
-    <img src="./assets/eteindre.png" id="arriere-img" alt="" srcset="">
+    <img onclick="turnOnBack()"  src="./assets/idee (1).png" id="arriere-img" alt="" srcset="">
+    <img onclick="turnOffBack()"  src="./assets/idee.png" id="arriere-img" alt="" srcset="">
+
   </div>
 </div>
-  
-  <button onclick="turnOn()">Allumer</button>
-  <button onclick="turnOff()">Éteindre</button>
-
   <script src="./voc.js"></script>
-  <script>
-    function turnOn() {
-      fetch('/on-all');
-    }
-    function turnOff() {
-      fetch('/off-all');
-    }
-  </script>
 </body>
 </html>
