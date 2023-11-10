@@ -61,7 +61,7 @@ recognition.onresult = function (event) {
         fetch(`/on-all-timer?duration=${timerDuration}`);
         readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
     }    
-    else if(transcript.includes('1') && transcript.includes('minute') && transcript.includes('allume')){
+    if(transcript.includes('1') && transcript.includes('minute') && transcript.includes('allume')){
         const minutes = 1
         let timerDuration = minutes * 60 * 1000; // Convertit les minutes en millisecondes
         fetch(`/on-all-timer?duration=${timerDuration}`);
