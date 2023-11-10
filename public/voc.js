@@ -96,10 +96,10 @@ function toggleSwitchRedLightFront(toggle) {
     var switchElement = toggle.querySelector('.switch');
     switchElement.classList.toggle('off-red-light');
     if(switchElement.classList.contains('off-red-light')){
-        fetch('/on-front')
+        fetch('/off-front')
     }
     else{
-        fetch('/off-front')
+        fetch('/on-front')
     }
   }
 
@@ -108,9 +108,9 @@ function toggleSwitchRedLightFront(toggle) {
     var switchElement = toggle.querySelector('.switch');
     switchElement.classList.toggle('off-red-light');
     if(switchElement.classList.contains('off-red-light')){
-        fetch('/on-back')
+        fetch('/off-back')
     }
     else{
-        fetch('/off-back')
+        fetch('/on-back')
     }
   }
