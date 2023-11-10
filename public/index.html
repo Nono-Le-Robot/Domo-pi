@@ -7,6 +7,19 @@
   <h1>Contrôle de LED</h1>
   <button onclick="turnOn()">Allumer</button>
   <button onclick="turnOff()">Éteindre</button>
+    <button id="startButton">Commencer la reconnaissance vocale</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const startButton = document.getElementById('startButton');
+
+            startButton.addEventListener('click', () => {
+                fetch('/listen')
+                    .then(response => response.text())
+                    .then(result => alert(result))
+                    .catch(error => console.error(error));
+            });
+        });
+    </script>
   <script>
     function turnOn() {
       fetch('/on');

@@ -15,6 +15,25 @@ app.get('/off', (req, res) => {
   res.send('LED éteinte');
 });
 
+app.get('/listen', (req, res) => {
+  const recognition = new webkitSpeechRecognition();
+  recognition.onresult = (event) => {
+    const result = event.results[0][0].transcript;
+    if (result.includes('allume la led')) {
+      led.writeSync(1); // Allumer la LED
+      res.send('LED allumée');
+    } else if (result.includes('éteins la led')) {
+      led.writeSync(0); // Éteindre la LED
+      res.send('LED éteinte');
+    } else {
+      res.send('Commande vocale non reconnue');
+    }
+  };
+
+  recognition.start();
+});
+
+
 const server = app.listen(3000, () => {
   console.log('Serveur démarré sur le port 3000');
 });
