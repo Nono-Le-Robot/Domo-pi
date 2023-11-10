@@ -31,7 +31,7 @@ recognition.onresult = function (event){
     transcript = transcript.toLowerCase(); 
     if(transcript.includes("led on")  ){
         console.log(transcript)
-        fetch('https://192.168.0.102/on');
+        fetch('/on');
 
         
         transcript = ""         
@@ -39,7 +39,7 @@ recognition.onresult = function (event){
     }
     if(transcript.includes("led off")  ){
         console.log(transcript)
-        fetch('https://192.168.0.102/off');
+        fetch('/off');
         transcript = ""         
         readOut("la led est eteinte")
     }
