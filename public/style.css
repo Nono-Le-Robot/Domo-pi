@@ -62,6 +62,8 @@
 
 .flex-img{
     display: flex;
+    position: relative;
+    top: -30px;
     
 }
 
