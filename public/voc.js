@@ -29,13 +29,13 @@ recognition.onresult = function (event){
     let transcript = event.results[current][0].transcript
     console.log(transcript);
     transcript = transcript.toLowerCase(); 
-    if(transcript.includes("allume l'avant")  ){
+    if(transcript.includes("allume l'avant" || transcript.includes('allume le vent'))  ){
         console.log(transcript)
         fetch('/on-front');
         transcript = ""         
         readOut("l'avant est allumé")
     }
-    if(transcript.includes("éteins l'avant")  ){
+    if(transcript.includes("éteins l'avant" || transcript.includes('éteins le vent'))  ){
         console.log(transcript)
         fetch('/off-front');
         transcript = ""         
