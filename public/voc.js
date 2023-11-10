@@ -29,17 +29,32 @@ recognition.onresult = function (event){
     let transcript = event.results[current][0].transcript
     console.log(transcript);
     transcript = transcript.toLowerCase(); 
-    if(transcript.includes("allume la led")  ){
+    if(transcript.includes("allume la led blanche")  ){
         console.log(transcript)
-        fetch('/on');
+        fetch('/on-white');
 
         
         transcript = ""         
         readOut("la led est allumée")
     }
-    if(transcript.includes("éteins la led")  ){
+    if(transcript.includes("éteins la led blanche")  ){
         console.log(transcript)
-        fetch('/off');
+        fetch('/off-white');
+        transcript = ""         
+        readOut("la led est eteinte")
+    }
+
+    if(transcript.includes("allume la led rouge")  ){
+        console.log(transcript)
+        fetch('/on-red');
+
+        
+        transcript = ""         
+        readOut("la led est allumée")
+    }
+    if(transcript.includes("éteins la led rouge")  ){
+        console.log(transcript)
+        fetch('/off-red');
         transcript = ""         
         readOut("la led est eteinte")
     }
