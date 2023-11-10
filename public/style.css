@@ -1,0 +1,62 @@
+body{
+    background-color: rgb(38, 41, 66);
+    color: white;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#logo{
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#head{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#main{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#avant{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+#avant-img{
+
+}
+
+#avant-img:hover{
+    cursor: pointer;
+}
+
+#arriere-img{
+
+}
+
+#arriere-img:hover{
+    cursor: pointer;
+}
+
+#arriere{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}

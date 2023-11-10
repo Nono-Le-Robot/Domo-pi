@@ -2,19 +2,34 @@
 <html>
 <head>
   <title>Contrôle de LED</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Contrôle de LED</h1>
+  <div id="head">
+    <img src="./assets/van.png" id="logo" alt="" srcset="">
+  </div>
+
+  <div id="main">
+    <div id="avant">
+      <h2>AVANT :</h2>
+      <img onclick="turnOn()" src="./assets/eteindre.png" id="avant-img" alt="" srcset="">
+  </div>
+  <div id="arriere">
+    <h2>ARRIERE :</h2>
+    <img src="./assets/eteindre.png" id="arriere-img" alt="" srcset="">
+  </div>
+</div>
+  
   <button onclick="turnOn()">Allumer</button>
   <button onclick="turnOff()">Éteindre</button>
-  <!-- <button id="mic">MIC</button> -->
+
   <script src="./voc.js"></script>
   <script>
     function turnOn() {
-      fetch('/on');
+      fetch('/on-all');
     }
     function turnOff() {
-      fetch('/off');
+      fetch('/off-all');
     }
   </script>
 </body>
