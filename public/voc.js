@@ -1,83 +1,70 @@
-const mic = document.querySelector("#mic")
+const mic = document.querySelector("#mic");
 
 //============================= Speech Recognition ==========================
-var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-var recognition = new SpeechRecognition();
-const assistName = "auto"
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
 recognition.continuous = false;
 recognition.lang = 'fr-FR';
+
 //============================= addEventListener ==========================
+let timerDuration = 0;
 
 mic.addEventListener("click", () => {
-        recognition.start()
-})
+    recognition.start();
+});
 
 //============================= Functions ==========================
 recognition.onstart = function () {
-}
+    console.log("Speech recognition started.");
+};
 
-function readOut(message){
+function readOut(message) {
     const speech = new SpeechSynthesisUtterance();
-    const allVoices = speechSynthesis.getVoices()
-    speech.text = message
-    speech.volume = 0.5
-    window.speechSynthesis.speak(speech)
+    speech.text = message;
+    speech.volume = 0.5;
+    window.speechSynthesis.speak(speech);
 }
 
-recognition.onresult = function (event){
-    let current = event.resultIndex
-    let transcript = event.results[current][0].transcript
+recognition.onresult = function (event) {
+    const current = event.resultIndex;
+    let transcript = event.results[current][0].transcript.toLowerCase();
+    
     console.log(transcript);
-    transcript = transcript.toLowerCase(); 
-    if(transcript.includes("allume l'avant" || transcript.includes('allume le vent'))  ){
-        console.log(transcript)
-        fetch('/on-front');
-        transcript = ""         
-        readOut("l'avant est allumé")
-    }
-    if(transcript.includes("éteins l'avant" || transcript.includes('éteins le vent'))  ){
-        console.log(transcript)
-        fetch('/off-front');
-        transcript = ""         
-        readOut("l'avant est eteins")
+
+    if (transcript.includes("allume")) {
+        if (transcript.includes("avant") || transcript.includes('vent')) {
+            fetch('/on-front');
+            readOut("l'avant est allumé");
+        } else if (transcript.includes("arrière")) {
+            fetch('/on-back');
+            readOut("l'arrière est allumé");
+        } else if (transcript.includes("tout")) {
+            fetch('/on-all');
+            readOut("tout est allumé");
+        }
+    } else if (transcript.includes("éteins")) {
+        if (transcript.includes("avant") || transcript.includes('vent')) {
+            fetch('/off-front');
+            readOut("l'avant est éteint");
+        } else if (transcript.includes("arrière")) {
+            fetch('/off-back');
+            readOut("l'arrière est éteint");
+        } else if (transcript.includes("tout")) {
+            fetch('/off-all');
+            readOut("tout est éteint");
+        }
     }
 
-    if(transcript.includes("allume l'arrière")  ){
-        console.log(transcript)
-        fetch('/on-back');
-        transcript = ""         
-        readOut("l'arriere est allumé")
-    }
-    if(transcript.includes("éteins l'arrière")  ){
-        console.log(transcript)
-        fetch('/off-back');
-        transcript = ""         
-        readOut("l'arriere est eteins")
-    }
-
-    if(transcript.includes("allume tout")  ){
-        console.log(transcript)
-        fetch('/on-all');
-        transcript = ""         
-        readOut("tout est allumé")
-    }
-
-    if(transcript.includes("éteins tout")  ){
-        console.log(transcript)
-        fetch('/off-all');
-        transcript = ""         
-        readOut("tout est eteins")
-    }
-
-    if(transcript.includes("allume 5 secondes")  ){
-        console.log(transcript)
-        fetch('/on-all-timer');
-        transcript = ""         
-        readOut("tout est allumé pendant 5 secondes")
-    }
-
-}
+    const match = transcript.match(/allume pendant (\d+) (minute|minutes)/);
+    if (match) {
+        const minutes = parseInt(match[1]);
+        timerDuration = minutes * 60 * 1000; // Convertit les minutes en millisecondes
+        fetch(`/on-all-timer?duration=${minutes}`);
+        readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
+    }    
+};
 
 recognition.onend = function () {
- recognition.start();
-}
+    console.log("Speech recognition ended. Restarting...");
+    recognition.start();
+};

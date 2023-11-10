@@ -42,14 +42,17 @@ app.get('/on-all', (req, res) => {
 });
 
 app.get('/on-all-timer', (req, res) => {
-  ledBack.writeSync(1); // Éteindre la LED
+  ledBack.writeSync(1);
   ledFront.writeSync(1);
-  setTimeout(() => {
-    ledBack.writeSync(0); // Éteindre la LED
-    ledFront.writeSync(0);
-  }, 5000);
-  res.send('LED éteinte');
+  
+  const duration = parseInt(req.query.duration) || 0; // Récupérer la durée depuis les paramètres de la requête
 
+  setTimeout(() => {
+      ledBack.writeSync(0);
+      ledFront.writeSync(0);
+  }, duration * 60 * 1000);
+
+  res.send(`LED allumée pendant ${duration} ${duration > 1 ? 'minutes' : 'minute'}`);
 });
 
 const server = app.listen(3000, () => {
