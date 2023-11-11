@@ -60,7 +60,7 @@ recognition.onresult = function (event) {
     const current = event.resultIndex;
     let transcript = event.results[current][0].transcript.toLowerCase();
     console.log(transcript)
-    if(transcript.includes('donovan') || transcript.includes('domo van') || transcript.includes('de nova') || transcript.includes('domova') || transcript.includes("mauvanne")|| transcript.includes("momova") || transcript.includes('tomova') || transcript.includes('nouveau van') || transcript.includes('beauval')){
+    if(transcript.includes('donovan') || transcript.includes('domo van') || transcript.includes('de nova') || transcript.includes('domova') || transcript.includes("mauvanne")|| transcript.includes("momova") || transcript.includes('tomova') || transcript.includes('nouveau van') || transcript.includes('beauval') || transcript.includes('mot van')){
         if (transcript.includes("allume")) {
             if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
                 fetch('/on-front');
