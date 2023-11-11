@@ -31,7 +31,9 @@ function fetchLEDStatus() {
             console.error('Erreur lors de la récupération de l\'état des LED:', error);
         });
 }
-fetchLEDStatus();
+setInterval(() => {
+    fetchLEDStatus();
+}, 1000);
 
 //============================= Functions ==========================
 recognition.onstart = function () {
