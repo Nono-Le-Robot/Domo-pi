@@ -47,6 +47,8 @@ function readOut(message) {
 }
 
 recognition.onresult = function (event) {
+    var switchElementFront = document.querySelector('.switch-front');
+    var switchElementBack = document.querySelector('.switch-back');
     const current = event.resultIndex;
     let transcript = event.results[current][0].transcript.toLowerCase();
     
