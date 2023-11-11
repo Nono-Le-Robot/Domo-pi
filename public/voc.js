@@ -40,9 +40,13 @@ setInterval(() => {
     fetchLEDStatus();
     if(loaded){
         document.querySelector('#app').style.display = "flex"
+        document.querySelector('.loading-window').style.display = "none"
+
     }
     else{
         document.querySelector('.loading-window').style.display = "flex"
+        document.querySelector('#app').style.display = "none"
+
     }
 }, 500);
 
