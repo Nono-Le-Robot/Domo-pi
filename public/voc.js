@@ -59,14 +59,16 @@ function readOut(message) {
 recognition.onresult = function (event) {
     const current = event.resultIndex;
     let transcript = event.results[current][0].transcript.toLowerCase();
-    if (transcript.includes("allume")) {
-        if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
-            fetch('/on-front');
-            readOut("l'avant est allumé");
-        } else if (transcript.includes("arrière")) {
-            fetch('/on-back');
-            readOut("l'arrière est allumé");
-        } else if (transcript.includes("tout")) {
+    if(transcript.includes('donovan') || transcript.includes('domo van') || transcript.includes('de nova')){
+
+        if (transcript.includes("allume")) {
+            if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
+                fetch('/on-front');
+                readOut("l'avant est allumé");
+            } else if (transcript.includes("arrière")) {
+                fetch('/on-back');
+                readOut("l'arrière est allumé");
+            } else if (transcript.includes("tout")) {
             fetch('/on-all');
             readOut("tout est allumé");
         }
@@ -82,7 +84,7 @@ recognition.onresult = function (event) {
             readOut("tout est éteint");
         }
     }
-
+    
     const match = transcript.match(/allume pendant (\d+) (minute|minutes)/);
     if (match) {
         const minutes = parseInt(match[1]);
@@ -96,6 +98,7 @@ recognition.onresult = function (event) {
         fetch(`/on-all-timer?duration=${timerDuration}`);
         readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
     }   
+}
 };
 
 recognition.onend = function () {
