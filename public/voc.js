@@ -72,16 +72,16 @@ recognition.onresult = function (event) {
     } else if (transcript.includes("éteins")) {
         if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
             fetch('/off-front');
-            if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
+            switchElementFront.classList.add('off-red-light');
             readOut("l'avant est éteint");
         } else if (transcript.includes("arrière")) {
             fetch('/off-back');
-            if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+            switchElementBack.classList.add('off-red-light');
             readOut("l'arrière est éteint");
         } else if (transcript.includes("tout")) {
             fetch('/off-all');
-            if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.add('off-red-light');
-            if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.add('off-red-light');
+            switchElementFront.classList.add('off-red-light');
+            switchElementBack.classList.add('off-red-light');
             readOut("tout est éteint");
         }
     }
