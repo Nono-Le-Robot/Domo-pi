@@ -10,12 +10,14 @@ recognition.lang = 'fr-FR';
 
 var switchElementFront = document.querySelector('.switch-front');
 var switchElementBack = document.querySelector('.switch-back');
+let loaded = false
 
 recognition.start();
 function fetchLEDStatus() {
     fetch('/status')
         .then(response => response.json())
         .then(status => {
+
             if(status.front){
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
             }
@@ -28,6 +30,7 @@ function fetchLEDStatus() {
             else{
                 switchElementBack.classList.add('off-red-light');
             }
+            loaded = true
         })
         .catch(error => {
             console.error('Erreur lors de la récupération de l\'état des LED:', error);
@@ -35,6 +38,12 @@ function fetchLEDStatus() {
 }
 setInterval(() => {
     fetchLEDStatus();
+    if(loaded){
+        document.querySelector('#app').style.display = "flex"
+    }
+    else{
+        document.querySelector('.loading-window').style.display = "flex"
+    }
 }, 500);
 
 //============================= Functions ==========================
