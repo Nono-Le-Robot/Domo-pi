@@ -59,8 +59,8 @@ function readOut(message) {
 recognition.onresult = function (event) {
     const current = event.resultIndex;
     let transcript = event.results[current][0].transcript.toLowerCase();
+    console.log(transcript)
     if(transcript.includes('donovan') || transcript.includes('domo van') || transcript.includes('de nova')){
-
         if (transcript.includes("allume")) {
             if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
                 fetch('/on-front');
