@@ -134,7 +134,7 @@ function turnOffAll() {
     fetch('/off-all');
 }
 
-function toggleSwitchRedLightFront(toggle) {
+function toggleSwitchRedLightFront() {
     if(switchElementFront.classList.contains('off-red-light')){
         fetch('/off-front')
     }
@@ -144,7 +144,7 @@ function toggleSwitchRedLightFront(toggle) {
   }
 
 
-  function toggleSwitchRedLightBack(toggle) {
+  function toggleSwitchRedLightBack() {
     if(switchElementBack.classList.contains('off-red-light')){
         fetch('/off-back')
     }
