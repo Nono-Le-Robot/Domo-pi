@@ -1,23 +1,18 @@
-const mic = document.querySelector("#mic");
+var switchElementFront = document.querySelector('.switch-front');
+var switchElementBack = document.querySelector('.switch-back');
+let loaded = false
 
 //============================= Speech Recognition ==========================
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 recognition.continuous = false;
 recognition.lang = 'fr-FR';
-
-
-
-var switchElementFront = document.querySelector('.switch-front');
-var switchElementBack = document.querySelector('.switch-back');
-let loaded = false
-
 recognition.start();
+
 function fetchLEDStatus() {
     fetch('/status')
         .then(response => response.json())
         .then(status => {
-
             if(status.front){
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
             }
@@ -36,17 +31,16 @@ function fetchLEDStatus() {
             console.error('Erreur lors de la récupération de l\'état des LED:', error);
         });
 }
+
 setInterval(() => {
     fetchLEDStatus();
     if(loaded){
         document.querySelector('#app').style.display = "flex"
         document.querySelector('.loading-window').style.display = "none"
-
     }
     else{
         document.querySelector('.loading-window').style.display = "flex"
         document.querySelector('#app').style.display = "none"
-
     }
 }, 500);
 
@@ -54,7 +48,6 @@ setInterval(() => {
 recognition.onstart = function () {
     console.log("Speech recognition started.");
 };
-
 
 function readOut(message) {
     const speech = new SpeechSynthesisUtterance();
@@ -66,9 +59,6 @@ function readOut(message) {
 recognition.onresult = function (event) {
     const current = event.resultIndex;
     let transcript = event.results[current][0].transcript.toLowerCase();
-    
-    console.log(transcript);
-
     if (transcript.includes("allume")) {
         if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
             fetch('/on-front');
@@ -96,13 +86,13 @@ recognition.onresult = function (event) {
     const match = transcript.match(/allume pendant (\d+) (minute|minutes)/);
     if (match) {
         const minutes = parseInt(match[1]);
-        let timerDuration = minutes * 60 * 1000; // Convertit les minutes en millisecondes
+        let timerDuration = minutes * 60 * 1000;
         fetch(`/on-all-timer?duration=${timerDuration}`);
         readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
     }    
     if(transcript.includes('une') && transcript.includes('minute') && transcript.includes('allume')){
         const minutes = 1
-        let timerDuration = minutes * 60 * 1000; // Convertit les minutes en millisecondes
+        let timerDuration = minutes * 60 * 1000;
         fetch(`/on-all-timer?duration=${timerDuration}`);
         readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
     }   
@@ -116,6 +106,7 @@ recognition.onend = function () {
 function turnOnFront() {
     fetch('/on-front');
 }
+
 function turnOffFront() {
     fetch('/off-front');
 }
@@ -141,16 +132,13 @@ function toggleSwitchRedLightFront() {
     else{
         fetch('/off-front')
     }
-  }
+}
 
-
-  function toggleSwitchRedLightBack() {
-      if(switchElementBack.classList.contains('off-red-light')){
-          fetch('/on-back')
-        }
-        else{
+function toggleSwitchRedLightBack() {
+    if(switchElementBack.classList.contains('off-red-light')){
+        fetch('/on-back')
+    }
+    else{
         fetch('/off-back')
     }
-  }
-
-
+}
