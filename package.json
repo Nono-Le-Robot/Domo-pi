@@ -6,7 +6,7 @@
   "scripts": {
     "on": "node on.js",
     "off": "node off.js",
-    "server": "node server.js check-connexion.js",
+    "server": "node server.js",
     "connexion" : "node check-connexion.js"
   },
   "repository": {
