@@ -60,7 +60,7 @@ recognition.onresult = function (event) {
     const current = event.resultIndex;
     let transcript = event.results[current][0].transcript.toLowerCase();
     console.log(transcript)
-    if(transcript.includes('donovan') || transcript.includes('domo van') || transcript.includes('de nova')){
+    if(transcript.includes('donovan') || transcript.includes('domo van') || transcript.includes('de nova') || transcript.includes('domova')){
         if (transcript.includes("allume")) {
             if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
                 fetch('/on-front');
@@ -72,7 +72,7 @@ recognition.onresult = function (event) {
             fetch('/on-all');
             readOut("tout est allumé");
         }
-    } else if (transcript.includes("éteins")) {
+    } else if (transcript.includes("éteins") || transcript.includes ("est à")) {
         if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
             fetch('/off-front');
             readOut("l'avant est éteint");
