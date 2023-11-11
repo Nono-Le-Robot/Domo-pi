@@ -33,7 +33,7 @@ function fetchLEDStatus() {
 }
 setInterval(() => {
     fetchLEDStatus();
-}, 1000);
+}, 250);
 
 //============================= Functions ==========================
 recognition.onstart = function () {
