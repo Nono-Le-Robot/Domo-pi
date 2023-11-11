@@ -91,7 +91,16 @@ recognition.onresult = function (event) {
         const minutes = parseInt(match[1]);
         let timerDuration = minutes * 60 * 1000; // Convertit les minutes en millisecondes
         fetch(`/on-all-timer?duration=${timerDuration}`);
+        var switchElementFront = document.querySelector('.switch-front');
+        var switchElementBack = document.querySelector('.switch-back');
+        switchElementFront.classList.remove('')
+        if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+        if(switchElementFront.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
         readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
+        setTimeout(() => {
+         switchElementBack.classList.add('off-red-light');
+         switchElementBack.classList.add('off-red-light');
+        }, timerDuration);
     }    
     if(transcript.includes('une') && transcript.includes('minute') && transcript.includes('allume')){
         const minutes = 1
