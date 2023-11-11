@@ -15,13 +15,13 @@ function fetchLEDStatus() {
         .then(response => response.json())
         .then(status => {
             if(status.front){
-                switchElementFront.classList.remove('off-red-light');
+                if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
             }
             else{
                 switchElementFront.classList.add('off-red-light');
             }
             if(status.back){
-                switchElementBack.classList.remove('off-red-light');
+                if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
             }
             else{
                 switchElementBack.classList.add('off-red-light');
@@ -33,7 +33,7 @@ function fetchLEDStatus() {
 }
 setInterval(() => {
     fetchLEDStatus();
-}, 250);
+}, 500);
 
 //============================= Functions ==========================
 recognition.onstart = function () {
