@@ -94,11 +94,11 @@ recognition.onresult = function (event) {
         var switchElementFront = document.querySelector('.switch-front');
         var switchElementBack = document.querySelector('.switch-back');
         if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
-        if(switchElementFront.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+        if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
         readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
         setTimeout(() => {
          switchElementBack.classList.add('off-red-light');
-         switchElementBack.classList.add('off-red-light');
+         switchElementFront.classList.add('off-red-light');
         }, timerDuration);
     }    
     if(transcript.includes('une') && transcript.includes('minute') && transcript.includes('allume')){
@@ -108,10 +108,10 @@ recognition.onresult = function (event) {
         var switchElementFront = document.querySelector('.switch-front');
         var switchElementBack = document.querySelector('.switch-back');
         if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
-        if(switchElementFront.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+        if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
         readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
         setTimeout(() => {
-            switchElementBack.classList.add('off-red-light');
+            switchElementFront.classList.add('off-red-light');
             switchElementBack.classList.add('off-red-light');
            }, timerDuration);
     }   
