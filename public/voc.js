@@ -10,7 +10,7 @@ recognition.lang = 'fr-FR';
 
 var switchElementFront = document.querySelector('.switch-front');
 var switchElementBack = document.querySelector('.switch-back');
-let loaded = false
+let loaded = true
 
 recognition.start();
 function fetchLEDStatus() {
@@ -135,6 +135,8 @@ function turnOffAll() {
 }
 
 function toggleSwitchRedLightFront() {
+    alert('gergerg')
+
     if(switchElementFront.classList.contains('off-red-light')){
         fetch('/off-front')
     }
@@ -145,11 +147,11 @@ function toggleSwitchRedLightFront() {
 
 
   function toggleSwitchRedLightBack() {
-    if(switchElementBack.classList.contains('off-red-light')){
+      if(switchElementBack.classList.contains('off-red-light')){
+          fetch('/on-back')
+        }
+        else{
         fetch('/off-back')
-    }
-    else{
-        fetch('/on-back')
     }
   }
 
