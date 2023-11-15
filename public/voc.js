@@ -17,14 +17,14 @@ function fetchStatus() {
     fetch('/status')
         .then(response => response.json())
         .then(status => {
-            temperature = status.temperature
-            humidity = status.humidity
+            temperature = status.temperature.toFixed(1)
+            humidity = status.humidity.toFixed(1)
             frontLightState = status.front
             backLightState = status.back
             const divHumidity = document.querySelector('#humidity-data')
             const divTemperature = document.querySelector('#temperature-data');
-            divHumidity.innerHTML = humidity.toFixed(1);
-            divTemperature.innerHTML = temperature.toFixed(1);
+            divHumidity.innerHTML = humidity;
+            divTemperature.innerHTML = temperature;
             if(status.front){
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
             }
