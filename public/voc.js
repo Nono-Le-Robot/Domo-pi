@@ -15,8 +15,8 @@ function fetchStatus() {
         .then(status => {
             const divHumidity = document.querySelector('#humidity-data')
             const divTemperature = document.querySelector('#temperature-data');
-            divHumidity.innerHTML = status.humidity;
-            divTemperature.innerHTML = status.temperature;
+            divHumidity.innerHTML = status.humidity.toFixed(2);
+            divTemperature.innerHTML = status.temperature.toFixed(2);
             if(status.front){
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
             }
