@@ -7,7 +7,7 @@
     "on": "node on.js",
     "off": "node off.js",
     "server": "node server.js",
-    "connexion" : "node check-connexion.js"
+    "connexion": "node check-connexion.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "localtunnel": "^2.0.2",
+    "node-dht-sensor": "^0.4.3",
     "onoff": "^6.0.3",
     "speech-recognition": "^0.0.1"
   }

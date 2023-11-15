@@ -9,10 +9,16 @@ recognition.continuous = false;
 recognition.lang = 'fr-FR';
 recognition.start();
 
-function fetchLEDStatus() {
+function fetchStatus() {
     fetch('/status')
         .then(response => response.json())
         .then(status => {
+            if(status.temperature){
+                console.log(status.temperature)
+            }
+            if(status.humidity){
+                console.log(status.humidity)
+            }
             if(status.front){
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
             }
@@ -33,7 +39,7 @@ function fetchLEDStatus() {
 }
 
 setInterval(() => {
-    fetchLEDStatus();
+    fetchStatus();
     if(loaded){
         document.querySelector('#app').style.display = "flex"
         document.querySelector('.loading-window').style.display = "none"
@@ -42,7 +48,7 @@ setInterval(() => {
         document.querySelector('.loading-window').style.display = "flex"
         document.querySelector('#app').style.display = "none"
     }
-}, 500);
+}, 1000);
 
 //============================= Functions ==========================
 recognition.onstart = function () {

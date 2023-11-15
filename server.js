@@ -1,5 +1,6 @@
 const express = require('express');
 const Gpio = require('onoff').Gpio;
+var sensor = require("node-dht-sensor");
 const app = express();
 const ledFront = new Gpio(6, 'out');
 const ledBack = new Gpio(5, 'out');
@@ -8,11 +9,16 @@ let timerId;
 app.use(express.static('public'));
 
 app.get('/status', (req, res) => {
-  const status = {
-    front: ledFront.readSync(),
-    back: ledBack.readSync(),
-  };
-  res.json(status);
+
+  sensor.read(22, 26, function(err, temperature, humidity) {
+    const status = {
+      front: ledFront.readSync(),
+      back: ledBack.readSync(),
+      temperature : temperature,
+      humidity :  humidity
+    };
+    res.json(status);
+  });
 });
 
 app.get('/on-front', (req, res) => {
