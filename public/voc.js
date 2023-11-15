@@ -1,6 +1,10 @@
 var switchElementFront = document.querySelector('.switch-front');
 var switchElementBack = document.querySelector('.switch-back');
 let loaded = true
+let temperature = 0;
+let humidity = 0;
+let frontLightState = 0;
+let backLightState = 0;
 
 //============================= Speech Recognition ==========================
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -13,10 +17,14 @@ function fetchStatus() {
     fetch('/status')
         .then(response => response.json())
         .then(status => {
+            temperature = status.temperature
+            humidity = status.humidity
+            frontLightState = status.front
+            backLightState = status.back
             const divHumidity = document.querySelector('#humidity-data')
             const divTemperature = document.querySelector('#temperature-data');
-            divHumidity.innerHTML = status.humidity.toFixed(1);
-            divTemperature.innerHTML = status.temperature.toFixed(1);
+            divHumidity.innerHTML = humidity.toFixed(1);
+            divTemperature.innerHTML = temperature.toFixed(1);
             if(status.front){
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
             }
@@ -65,6 +73,14 @@ recognition.onresult = function (event) {
     let transcript = event.results[current][0].transcript.toLowerCase();
     console.log(transcript)
     if(transcript.includes('donovan') || transcript.includes('domo van') || transcript.includes('de nova') || transcript.includes('domova') || transcript.includes("mauvanne")|| transcript.includes("momova") || transcript.includes('tomova') || transcript.includes('nouveau van') || transcript.includes('beauval') || transcript.includes('mot van')){
+        if(transcript.includes('quel')){
+            if(transcript.includes('température')){
+                readOut(`la température est de ${temperature} degrès`)
+            }
+            if(transcript.includes('humidité')){
+                readOut(`le taux d'humidité est de ${humidity} pourcents`)
+            }
+        }
         if (transcript.includes("allume")) {
             if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
                 fetch('/on-front');
