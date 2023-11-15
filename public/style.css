@@ -23,8 +23,8 @@
 #main{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    gap: 20vw;
+    justify-content: center;
+    width: 100vw;
 }
 
 #avant{
@@ -590,10 +590,37 @@
     display: none;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    height: 100vh;
 
   }
 
   .loading-window{
     display: none;
+  }
+
+#temp-hygro-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  gap: 15rem;
+}
+
+
+  #temperature-div, #humidity-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+  }
+    
+  #temperature-value, #humidity-value{
+    font-size: 2rem;
+
+  }
+
+  #temperature-icon, #humidity-icon{
+    width: 110px;
   }

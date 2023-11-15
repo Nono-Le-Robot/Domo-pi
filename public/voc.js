@@ -1,6 +1,6 @@
 var switchElementFront = document.querySelector('.switch-front');
 var switchElementBack = document.querySelector('.switch-back');
-let loaded = false
+let loaded = true
 
 //============================= Speech Recognition ==========================
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -13,12 +13,10 @@ function fetchStatus() {
     fetch('/status')
         .then(response => response.json())
         .then(status => {
-            if(status.temperature){
-                console.log(status.temperature)
-            }
-            if(status.humidity){
-                console.log(status.humidity)
-            }
+            const divHumidity = document.querySelector('#humidity-data')
+            const divTemperature = document.querySelector('#temperature-data');
+            divHumidity.innerHTML = status.humidity;
+            divTemperature.innerHTML = status.temperature;
             if(status.front){
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
             }
