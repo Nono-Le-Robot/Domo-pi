@@ -35,7 +35,8 @@ while true; do
       -d chat_id=$CHAT_ID
 
     # Envoyer le nouveau message avec l'adresse IP
-    send_message "IP Address: $IP_ADDRESS"
+    cleaned_ip=$(echo "$IP_ADDRESS" | sed 's/http:\/\///')
+    send_message "IP Address: $cleaned_ip"
   else
     send_message "Erreur lors de la récupération de l'adresse IP."
   fi
