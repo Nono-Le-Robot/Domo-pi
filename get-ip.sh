@@ -36,7 +36,7 @@ while true; do
 
     # Envoyer le nouveau message avec l'adresse IP
     cleaned_ip=$(echo "$IP_ADDRESS" | sed 's/http:\/\///')
-    send_message "IP Address: $cleaned_ip"
+    send_message "IP Address: http://$cleaned_ip"$'\001'
   else
     send_message "Erreur lors de la récupération de l'adresse IP."
   fi
