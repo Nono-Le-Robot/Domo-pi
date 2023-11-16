@@ -1,6 +1,6 @@
 var switchElementFront = document.querySelector('.switch-front');
 var switchElementBack = document.querySelector('.switch-back');
-let loaded = true
+let loaded = false;
 let temperature = 0;
 let humidity = 0;
 let frontLightState = 0;
