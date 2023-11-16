@@ -11,8 +11,8 @@ tmux select-pane -t 1
 tmux send-keys -t mysession:0.1 'sudo ./restart-lt.sh' C-m
 
 # Fenêtre 3
-tmux new-window -t mysession
-tmux select-pane -t 0
-tmux send-keys -t mysession:1.0 'sudo ./get_ip.sh' C-m
+tmux split-window -h -t mysession
+tmux select-pane -t 2
+tmux send-keys -t mysession:0.2 'sudo ./get_ip.sh' C-m
 
 tmux attach -t mysession
