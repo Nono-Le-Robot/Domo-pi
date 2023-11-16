@@ -5,6 +5,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  
+  <h1>DomoVan</h1>
+  <h2>IP : <span id="ip-adresse"></span></h2>
   <div id="app">
     <div id="temp-hygro-div">
       <div id="temperature-div">
@@ -85,5 +88,20 @@
 
 </div>
 <script src="./voc.js"></script>
+<script>
+  // Function to get the user's IP address
+  function getIPAddress() {
+    fetch('https://api64.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        // Update the content of the span with the obtained IP address
+        document.getElementById('ip-adresse').textContent = data.ip;
+      })
+      .catch(error => console.error('Error fetching IP address:', error));
+  }
+
+  // Call the function to get and display the IP address
+  getIPAddress();
+</script>
 </body>
 </html>
