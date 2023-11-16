@@ -13,6 +13,7 @@ tmux send-keys -t mysession:0.1 'sudo ./restart-lt.sh' C-m
 # Fenêtre 3
 tmux split-window -h -t mysession
 tmux select-pane -t 2
-tmux send-keys -t mysession:0.2 './get_ip.sh' C-m
+tmux send-keys -t mysession:0.2 'chmod +x get_ip.sh' C-m
+tmux send-keys -t mysession:0.2 'sudo ./get_ip.sh' C-m
 
 tmux attach -t mysession
