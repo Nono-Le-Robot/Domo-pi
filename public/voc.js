@@ -10,8 +10,6 @@ const divTemperature = document.querySelector('#temperature-data');
 let loaded = false;
 let temperature = 0;
 let humidity = 0;
-let frontLightState = 0;
-let backLightState = 0;
 let alreadyClick = false;
 
 //============================= Speech Recognition ==========================
@@ -27,10 +25,9 @@ function fetchStatus() {
         .then(status => {
             temperature = status.temperature.toFixed(1)
             humidity = status.humidity.toFixed(1)
-            frontLightState = status.front
-            backLightState = status.back
             divHumidity.innerHTML = humidity;
             divTemperature.innerHTML = temperature;
+
             if(loaded){
                 document.querySelector('#app').style.display = "flex"
                 document.querySelector('.loading-window').style.display = "none"
@@ -42,7 +39,7 @@ function fetchStatus() {
                 document.querySelector('#app').style.display = "none"
             }
 
-            if(frontLightState){
+            if(status.front){
                 if(!loaded){
                     if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
                 }
@@ -55,7 +52,7 @@ function fetchStatus() {
                 pastilleFront.style.backgroundColor = 'rgb(245, 96, 96)';
             }
 
-            if(backLightState){
+            if(status.back){
                 if(!loaded){
                 if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
                 }
@@ -194,7 +191,6 @@ function turnOffAll() {
 }
 
 function toggleSwitchRedLightFront() {
-    alreadyClick = true;
     if(switchElementFront.classList.contains('off-red-light')){
         if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
         fetch('/on-front')
@@ -206,7 +202,6 @@ function toggleSwitchRedLightFront() {
 }
 
 function toggleSwitchRedLightBack() {
-    alreadyClick = true;
     if(switchElementBack.classList.contains('off-red-light')){
         if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
         fetch('/on-back')
