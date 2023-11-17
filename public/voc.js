@@ -2,7 +2,7 @@ const switchElementFront = document.querySelector('.switch-front');
 const switchElementBack = document.querySelector('.switch-back');
 const pastilleFront = document.querySelector('#pastille-avant');
 const pastilleBack = document.querySelector('#pastille-arriere');
-let loaded = true;
+let loaded = false;
 let temperature = 0;
 let humidity = 0;
 let frontLightState = 0;
@@ -71,7 +71,7 @@ setInterval(() => {
         document.querySelector('.loading-window').style.display = "flex"
         document.querySelector('#app').style.display = "none"
     }
-}, 500);
+}, 1000);
 
 //============================= Functions ==========================
 recognition.onstart = function () {
