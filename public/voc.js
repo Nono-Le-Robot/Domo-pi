@@ -1,12 +1,18 @@
+//============================= Selectors ==========================
 const switchElementFront = document.querySelector('.switch-front');
 const switchElementBack = document.querySelector('.switch-back');
 const pastilleFront = document.querySelector('#pastille-avant');
 const pastilleBack = document.querySelector('#pastille-arriere');
+const divHumidity = document.querySelector('#humidity-data')
+const divTemperature = document.querySelector('#temperature-data');
+
+//============================= Variables ==========================
 let loaded = false;
 let temperature = 0;
 let humidity = 0;
 let frontLightState = 0;
 let backLightState = 0;
+let alreadyClick = false;
 
 //============================= Speech Recognition ==========================
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -17,44 +23,51 @@ recognition.start();
 
 function fetchStatus() {
     fetch('/status')
-        .then(response => response.json())
+    .then(response => response.json())
         .then(status => {
             temperature = status.temperature.toFixed(1)
             humidity = status.humidity.toFixed(1)
             frontLightState = status.front
             backLightState = status.back
-            const divHumidity = document.querySelector('#humidity-data')
-            const divTemperature = document.querySelector('#temperature-data');
             divHumidity.innerHTML = humidity;
             divTemperature.innerHTML = temperature;
-            if(status.front){
-                if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
+            if(loaded){
+                document.querySelector('#app').style.display = "flex"
+                document.querySelector('.loading-window').style.display = "none"
+                pastilleFront.style.display = 'flex';
+                pastilleBack.style.display = 'flex';
             }
             else{
+                document.querySelector('.loading-window').style.display = "flex"
+                document.querySelector('#app').style.display = "none"
+            }
+
+            if(frontLightState){
+                if(!loaded){
+                    if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
+                }
+                pastilleFront.style.backgroundColor = 'rgb(106, 245, 96);';
+            }
+            else{
+                if(!loaded){
                 switchElementFront.classList.add('off-red-light');
-            }
-            if(status.back){
-                if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
-            }
-            else{
-                switchElementBack.classList.add('off-red-light');
-            }
-            if(status.front){
-                pastilleFront.style.backgroundColor = 'rgb(106, 245, 96)';
-            }
-            else{
+                }
                 pastilleFront.style.backgroundColor = 'rgb(245, 96, 96)';
             }
-            if (status.back){
+
+            if(backLightState){
+                if(!loaded){
+                if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+                }
                 pastilleBack.style.backgroundColor = 'rgb(106, 245, 96)';
             }
             else{
-                pastilleBack.style.backgroundColor = 'rgb(245, 96, 96)';
+                if(!loaded){
+                switchElementBack.classList.add('off-red-light');
+                }
+                pastilleFront.style.backgroundColor = 'rgb(245, 96, 96)';
             }
             loaded = true
-            pastilleFront.style.display = 'flex';
-            pastilleBack.style.display = 'flex';
-
         })
         .catch(error => {
             console.error('Erreur lors de la récupération de l\'état des LED:', error);
@@ -63,14 +76,6 @@ function fetchStatus() {
 
 setInterval(() => {
     fetchStatus();
-    if(loaded){
-        document.querySelector('#app').style.display = "flex"
-        document.querySelector('.loading-window').style.display = "none"
-    }
-    else{
-        document.querySelector('.loading-window').style.display = "flex"
-        document.querySelector('#app').style.display = "none"
-    }
 }, 1000);
 
 //============================= Functions ==========================
@@ -101,31 +106,31 @@ recognition.onresult = function (event) {
         if (transcript.includes("allume")) {
             if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
-                fetch('/on-front');
+                turnOnFront();
                 readOut("l'avant est allumé");
             } else if (transcript.includes("arrière")) {
                 if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
-                fetch('/on-back');
+                turnOnBack();
                 readOut("l'arrière est allumé");
             } else if (transcript.includes("tout")) {
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
                 if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
-                fetch('/on-all');
+                turnOnAll();
                 readOut("tout est allumé");
             }
     } else if (transcript.includes("éteins") || transcript.includes ("est à")) {
         if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
             switchElementFront.classList.add('off-red-light');
-            fetch('/off-front');
+            turnOffFront()
             readOut("l'avant est éteint");
         } else if (transcript.includes("arrière")) {
             switchElementBack.classList.add('off-red-light');
-            fetch('/off-back');
+            turnOffBack()
             readOut("l'arrière est éteint");
         } else if (transcript.includes("tout")) {
             switchElementFront.classList.add('off-red-light');
             switchElementBack.classList.add('off-red-light');
-            fetch('/off-all');
+            turnOffAll();
             readOut("tout est éteint");
         }
     }
@@ -189,6 +194,7 @@ function turnOffAll() {
 }
 
 function toggleSwitchRedLightFront() {
+    alreadyClick = true;
     if(switchElementFront.classList.contains('off-red-light')){
         if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
         fetch('/on-front')
@@ -200,6 +206,7 @@ function toggleSwitchRedLightFront() {
 }
 
 function toggleSwitchRedLightBack() {
+    alreadyClick = true;
     if(switchElementBack.classList.contains('off-red-light')){
         if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
         fetch('/on-back')
