@@ -1,6 +1,8 @@
-var switchElementFront = document.querySelector('.switch-front');
-var switchElementBack = document.querySelector('.switch-back');
-let loaded = false;
+const switchElementFront = document.querySelector('.switch-front');
+const switchElementBack = document.querySelector('.switch-back');
+const pastilleFront = document.querySelector('#pastille-avant');
+const pastilleBack = document.querySelector('#pastille-arriere');
+let loaded = true;
 let temperature = 0;
 let humidity = 0;
 let frontLightState = 0;
@@ -17,6 +19,8 @@ function fetchStatus() {
     fetch('/status')
         .then(response => response.json())
         .then(status => {
+            status.front = 1;
+            status.back = 1;
             temperature = status.temperature.toFixed(1)
             humidity = status.humidity.toFixed(1)
             frontLightState = status.front
@@ -36,7 +40,21 @@ function fetchStatus() {
                     if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
                 }
                 else{
-                switchElementBack.classList.add('off-red-light');
+                    switchElementBack.classList.add('off-red-light');
+                }
+            }
+            else{
+                if(status.front){
+                    pastilleFront.style.backgroundColor = 'rgb(106, 245, 96)';
+                }
+                else{
+                    pastilleFront.style.backgroundColor = 'rgb(106, 245, 96)';
+                }
+                if (status.back){
+                    pastilleBack.style.backgroundColor = 'rgb(106, 245, 96)';
+                }
+                else{
+                    pastilleBack.style.backgroundColor = 'rgb(245, 96, 96)';
                 }
             }
             loaded = true
