@@ -22,8 +22,8 @@ function fetchStatus() {
     fetch('/status')
     .then(response => response.json())
         .then(status => {
-            temperature = status.temperature.toFixed(1)
-            humidity = status.humidity.toFixed(1)
+            temperature = status.temperature.toFixed(1);
+            humidity = status.humidity.toFixed(1);
             divHumidity.innerHTML = humidity;
             divTemperature.innerHTML = temperature;
 
@@ -42,27 +42,29 @@ function fetchStatus() {
                 if(!loaded){
                     if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
                 }
-                pastilleFront.style.backgroundColor = 'rgb(106, 245, 96);';
+                pastilleFront.style.backgroundColor = 'rgb(106, 245, 96)';
             }
             else{
                 if(!loaded){
-                switchElementFront.classList.add('off-red-light');
+                    switchElementFront.classList.add('off-red-light');
                 }
                 pastilleFront.style.backgroundColor = 'rgb(245, 96, 96)';
             }
 
             if(status.back){
                 if(!loaded){
-                if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+                    if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
                 }
                 pastilleBack.style.backgroundColor = 'rgb(106, 245, 96)';
             }
             else{
                 if(!loaded){
-                switchElementBack.classList.add('off-red-light');
+                    switchElementBack.classList.add('off-red-light');
                 }
                 pastilleBack.style.backgroundColor = 'rgb(245, 96, 96)';
             }
+
+
             loaded = true
         })
         .catch(error => {
@@ -72,7 +74,7 @@ function fetchStatus() {
 
 setInterval(() => {
     fetchStatus();
-}, 1000);
+}, 500);
 
 //============================= Functions ==========================
 recognition.onstart = function () {
