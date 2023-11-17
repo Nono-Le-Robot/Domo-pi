@@ -25,17 +25,19 @@ function fetchStatus() {
             const divTemperature = document.querySelector('#temperature-data');
             divHumidity.innerHTML = humidity;
             divTemperature.innerHTML = temperature;
-            if(status.front){
-                if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
-            }
-            else{
-                switchElementFront.classList.add('off-red-light');
-            }
-            if(status.back){
-                if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
-            }
-            else{
+            if(loaded === false){
+                if(status.front){
+                    if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
+                }
+                else{
+                    switchElementFront.classList.add('off-red-light');
+                }
+                if(status.back){
+                    if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+                }
+                else{
                 switchElementBack.classList.add('off-red-light');
+                }
             }
             loaded = true
         })
@@ -54,7 +56,7 @@ setInterval(() => {
         document.querySelector('.loading-window').style.display = "flex"
         document.querySelector('#app').style.display = "none"
     }
-}, 1000);
+}, 2000);
 
 //============================= Functions ==========================
 recognition.onstart = function () {
@@ -83,23 +85,31 @@ recognition.onresult = function (event) {
         }
         if (transcript.includes("allume")) {
             if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
+                if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
                 fetch('/on-front');
                 readOut("l'avant est allumé");
             } else if (transcript.includes("arrière")) {
+                if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
                 fetch('/on-back');
                 readOut("l'arrière est allumé");
             } else if (transcript.includes("tout")) {
-            fetch('/on-all');
-            readOut("tout est allumé");
-        }
+                if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
+                if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+                fetch('/on-all');
+                readOut("tout est allumé");
+            }
     } else if (transcript.includes("éteins") || transcript.includes ("est à")) {
         if (transcript.includes("avant") || transcript.includes('vent') || transcript.includes('lampe')) {
+            switchElementFront.classList.add('off-red-light');
             fetch('/off-front');
             readOut("l'avant est éteint");
         } else if (transcript.includes("arrière")) {
+            switchElementBack.classList.add('off-red-light');
             fetch('/off-back');
             readOut("l'arrière est éteint");
         } else if (transcript.includes("tout")) {
+            switchElementFront.classList.add('off-red-light');
+            switchElementBack.classList.add('off-red-light');
             fetch('/off-all');
             readOut("tout est éteint");
         }
@@ -109,13 +119,28 @@ recognition.onresult = function (event) {
     if (match) {
         const minutes = parseInt(match[1]);
         let timerDuration = minutes * 60 * 1000;
-        fetch(`/on-all-timer?duration=${timerDuration}`);
+        switchElementFront.classList.add('off-red-light');
+        switchElementBack.classList.add('off-red-light');
+        fetch(`/on-all-timer?duration=${timerDuration}`).then(()=>{
+            setTimeout(() => {
+                if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
+                if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+            }, timerDuration);
+        });
         readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
     }    
     if(transcript.includes('une') && transcript.includes('minute') && transcript.includes('allume')){
-        const minutes = 1
+        const minutes = 1;
         let timerDuration = minutes * 60 * 1000;
-        fetch(`/on-all-timer?duration=${timerDuration}`);
+        switchElementFront.classList.add('off-red-light');
+        switchElementBack.classList.add('off-red-light');
+
+        fetch(`/on-all-timer?duration=${timerDuration}`).then(()=>{
+            setTimeout(() => {
+                if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
+                if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+            }, timerDuration);
+        });
         readOut(`tout est allumé pendant ${minutes} ${minutes > 1 ? 'minutes' : 'minute'}`);
     }   
 }
