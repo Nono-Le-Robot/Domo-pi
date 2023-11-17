@@ -41,19 +41,17 @@ function fetchStatus() {
                     switchElementBack.classList.add('off-red-light');
                 }
             }
+            if(status.front){
+                pastilleFront.style.backgroundColor = 'rgb(106, 245, 96)';
+            }
             else{
-                if(status.front){
-                    pastilleFront.style.backgroundColor = 'rgb(106, 245, 96)';
-                }
-                else{
-                    pastilleFront.style.backgroundColor = 'rgb(245, 96, 96)';
-                }
-                if (status.back){
-                    pastilleBack.style.backgroundColor = 'rgb(106, 245, 96)';
-                }
-                else{
-                    pastilleBack.style.backgroundColor = 'rgb(245, 96, 96)';
-                }
+                pastilleFront.style.backgroundColor = 'rgb(245, 96, 96)';
+            }
+            if (status.back){
+                pastilleBack.style.backgroundColor = 'rgb(106, 245, 96)';
+            }
+            else{
+                pastilleBack.style.backgroundColor = 'rgb(245, 96, 96)';
             }
             loaded = true
         })
