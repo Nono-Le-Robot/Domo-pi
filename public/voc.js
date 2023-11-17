@@ -54,6 +54,9 @@ function fetchStatus() {
                 pastilleBack.style.backgroundColor = 'rgb(245, 96, 96)';
             }
             loaded = true
+            pastilleBack.style.display = 'flex';
+            pastilleBack.style.display = 'flex';
+
         })
         .catch(error => {
             console.error('Erreur lors de la récupération de l\'état des LED:', error);
@@ -70,7 +73,7 @@ setInterval(() => {
         document.querySelector('.loading-window').style.display = "flex"
         document.querySelector('#app').style.display = "none"
     }
-}, 2000);
+}, 500);
 
 //============================= Functions ==========================
 recognition.onstart = function () {

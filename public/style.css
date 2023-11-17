@@ -641,6 +641,7 @@ h2{
     background-color: rgb(245, 96, 96);
     position:relative;
     top:-50px;
+    display: none;
   }
 
 
@@ -653,4 +654,6 @@ h2{
     background-color: rgb(106, 245, 96);
     position:relative;
     top:-50px;
+    display: none;
+
   }
