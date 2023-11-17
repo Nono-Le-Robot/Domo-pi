@@ -19,8 +19,6 @@ function fetchStatus() {
     fetch('/status')
         .then(response => response.json())
         .then(status => {
-            status.front = 1;
-            status.back = 1;
             temperature = status.temperature.toFixed(1)
             humidity = status.humidity.toFixed(1)
             frontLightState = status.front
