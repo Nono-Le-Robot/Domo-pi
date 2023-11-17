@@ -10,7 +10,6 @@ const divTemperature = document.querySelector('#temperature-data');
 let loaded = false;
 let temperature = 0;
 let humidity = 0;
-let alreadyClick = false;
 
 //============================= Speech Recognition ==========================
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -62,7 +61,7 @@ function fetchStatus() {
                 if(!loaded){
                 switchElementBack.classList.add('off-red-light');
                 }
-                pastilleFront.style.backgroundColor = 'rgb(245, 96, 96)';
+                pastilleBack.style.backgroundColor = 'rgb(245, 96, 96)';
             }
             loaded = true
         })
