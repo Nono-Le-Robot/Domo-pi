@@ -27,19 +27,17 @@ function fetchStatus() {
             const divTemperature = document.querySelector('#temperature-data');
             divHumidity.innerHTML = humidity;
             divTemperature.innerHTML = temperature;
-            if(loaded === false){
-                if(status.front){
-                    if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
-                }
-                else{
-                    switchElementFront.classList.add('off-red-light');
-                }
-                if(status.back){
-                    if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
-                }
-                else{
-                    switchElementBack.classList.add('off-red-light');
-                }
+            if(status.front){
+                if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
+            }
+            else{
+                switchElementFront.classList.add('off-red-light');
+            }
+            if(status.back){
+                if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
+            }
+            else{
+                switchElementBack.classList.add('off-red-light');
             }
             if(status.front){
                 pastilleFront.style.backgroundColor = 'rgb(106, 245, 96)';
