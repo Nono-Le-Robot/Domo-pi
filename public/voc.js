@@ -175,18 +175,22 @@ function turnOffAll() {
 
 function toggleSwitchRedLightFront() {
     if(switchElementFront.classList.contains('off-red-light')){
+        if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
         fetch('/on-front')
     }
     else{
+        switchElementFront.classList.add('off-red-light');
         fetch('/off-front')
     }
 }
 
 function toggleSwitchRedLightBack() {
     if(switchElementBack.classList.contains('off-red-light')){
+        if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
         fetch('/on-back')
     }
     else{
+        switchElementBack.classList.add('off-red-light');
         fetch('/off-back')
     }
 }
