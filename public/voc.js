@@ -54,7 +54,7 @@ function fetchStatus() {
                 pastilleBack.style.backgroundColor = 'rgb(245, 96, 96)';
             }
             loaded = true
-            pastilleBack.style.display = 'flex';
+            pastilleFront.style.display = 'flex';
             pastilleBack.style.display = 'flex';
 
         })
