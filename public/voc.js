@@ -10,6 +10,7 @@ const divTemperature = document.querySelector('#temperature-data');
 let loaded = false;
 let temperature = 0;
 let humidity = 0;
+let isFetching = false;
 
 //============================= Speech Recognition ==========================
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -19,11 +20,14 @@ recognition.lang = 'fr-FR';
 recognition.start();
 
 async function fetchStatus() {
-   await fetch('/status')
-    .then(response => response.json())
-        .then(status => {
-            if(status){
-
+    if (isFetching) {
+        return;
+    }
+    isFetching = true;
+    try {
+        const response = await fetch('/status');
+        const status = await response.json();
+        if(status){
                 temperature = status.temperature.toFixed(1);
                 humidity = status.humidity.toFixed(1);
                 divHumidity.innerHTML = humidity;
@@ -69,10 +73,12 @@ async function fetchStatus() {
             
         }
             loaded = true
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Erreur lors de la récupération de l\'état des LED:', error);
-        });
+        } finally {
+            // Reset the flag when the request is completed (whether successful or not)
+            isFetching = false;
+        }
 }
 
 setInterval(async () => {
