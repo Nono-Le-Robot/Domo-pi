@@ -18,8 +18,8 @@ recognition.continuous = false;
 recognition.lang = 'fr-FR';
 recognition.start();
 
-function fetchStatus() {
-    fetch('/status')
+async function fetchStatus() {
+   await fetch('/status')
     .then(response => response.json())
         .then(status => {
             if(status){
@@ -75,8 +75,8 @@ function fetchStatus() {
         });
 }
 
-setInterval(() => {
-    fetchStatus();
+setInterval(async () => {
+   await fetchStatus();
 }, 500);
 
 //============================= Functions ==========================
@@ -91,7 +91,7 @@ function readOut(message) {
     window.speechSynthesis.speak(speech);
 }
 
-recognition.onresult = function (event) {
+recognition.onresult = async function (event) {
     const current = event.resultIndex;
     let transcript = event.results[current][0].transcript.toLowerCase();
     console.log(transcript)
@@ -142,7 +142,7 @@ recognition.onresult = function (event) {
         let timerDuration = minutes * 60 * 1000;
         switchElementFront.classList.add('off-red-light');
         switchElementBack.classList.add('off-red-light');
-        fetch(`/on-all-timer?duration=${timerDuration}`).then(()=>{
+        await fetch(`/on-all-timer?duration=${timerDuration}`).then(()=>{
             setTimeout(() => {
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
                 if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
@@ -156,7 +156,7 @@ recognition.onresult = function (event) {
         switchElementFront.classList.add('off-red-light');
         switchElementBack.classList.add('off-red-light');
 
-        fetch(`/on-all-timer?duration=${timerDuration}`).then(()=>{
+        await fetch(`/on-all-timer?duration=${timerDuration}`).then(()=>{
             setTimeout(() => {
                 if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
                 if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
@@ -172,46 +172,46 @@ recognition.onend = function () {
     recognition.start();
 };
 
-function turnOnFront() {
-    fetch('/on-front');
+async function turnOnFront() {
+    await fetch('/on-front');
 }
 
-function turnOffFront() {
-    fetch('/off-front');
+async function turnOffFront() {
+    await fetch('/off-front');
 }
 
-function turnOnBack() {
-    fetch('/on-back');
+async function turnOnBack() {
+    await fetch('/on-back');
 }
-function turnOffBack() {
-    fetch('/off-back');
-}
-
-function turnOnAll() {
-    fetch('/on-all');
-}
-function turnOffAll() {
-    fetch('/off-all');
+async function turnOffBack() {
+    await fetch('/off-back');
 }
 
-function toggleSwitchRedLightFront() {
+async function turnOnAll() {
+    await fetch('/on-all');
+}
+async function turnOffAll() {
+    await fetch('/off-all');
+}
+
+async function toggleSwitchRedLightFront() {
     if(switchElementFront.classList.contains('off-red-light')){
         if(switchElementFront.classList.contains('off-red-light')) switchElementFront.classList.remove('off-red-light');
-        fetch('/on-front')
+        await fetch('/on-front')
     }
     else{
         switchElementFront.classList.add('off-red-light');
-        fetch('/off-front')
+        await fetch('/off-front')
     }
 }
 
-function toggleSwitchRedLightBack() {
+async function toggleSwitchRedLightBack() {
     if(switchElementBack.classList.contains('off-red-light')){
         if(switchElementBack.classList.contains('off-red-light')) switchElementBack.classList.remove('off-red-light');
-        fetch('/on-back')
+        await fetch('/on-back')
     }
     else{
         switchElementBack.classList.add('off-red-light');
-        fetch('/off-back')
+        await fetch('/off-back')
     }
 }
