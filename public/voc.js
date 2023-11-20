@@ -22,13 +22,15 @@ function fetchStatus() {
     fetch('/status')
     .then(response => response.json())
         .then(status => {
-            temperature = status.temperature.toFixed(1);
-            humidity = status.humidity.toFixed(1);
-            divHumidity.innerHTML = humidity;
-            divTemperature.innerHTML = temperature;
+            if(status){
 
-            if(loaded){
-                document.querySelector('#app').style.display = "flex"
+                temperature = status.temperature.toFixed(1);
+                humidity = status.humidity.toFixed(1);
+                divHumidity.innerHTML = humidity;
+                divTemperature.innerHTML = temperature;
+                
+                if(loaded){
+                    document.querySelector('#app').style.display = "flex"
                 document.querySelector('.loading-window').style.display = "none"
                 pastilleFront.style.display = 'flex';
                 pastilleBack.style.display = 'flex';
@@ -63,8 +65,9 @@ function fetchStatus() {
                 }
                 pastilleBack.style.backgroundColor = 'rgb(245, 96, 96)';
             }
-
-
+            
+            
+        }
             loaded = true
         })
         .catch(error => {
