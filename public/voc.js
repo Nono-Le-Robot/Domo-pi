@@ -75,10 +75,12 @@ async function fetchStatus() {
             loaded = true
         } catch (error) {
             console.error('Erreur lors de la récupération de l\'état des LED:', error);
+            isFetching = false
         } finally {
             // Reset the flag when the request is completed (whether successful or not)
             isFetching = false;
         }
+        isFetching = false
 }
 
 setInterval(async () => {
